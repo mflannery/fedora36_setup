@@ -1,6 +1,12 @@
 #!/bin/bash
 #
 
+# Enable passwordless sudo
+sudo bash -c 'cat << EOF > /etc/sudoers.d/wheel
+# %wheel	ALL=(ALL)	ALL
+%wheel	ALL=(ALL)	NOPASSWD: ALL
+EOF'
+
 # Increase the number of parallel downloads in dnf
 sudo bash -c "echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf"
 
