@@ -71,11 +71,11 @@ sudo firewall-cmd --add-service=cockpit
 sudo firewall-cmd --runtime-to-permanent
 sudo systemctl enable --now cockpit.socket
 
+# Install Remmina
+sudo dnf install -y remmina remmina-gnome-session remmina-plugins-kwallet remmina-plugins-spice remmina-plugins-www remmina-plugins-x2go
+
 # Enable flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-# Install Gnome Extensions
-flatpak install -y --noninteractive flathub org.gnome.Extensions
 
 # Install Gnome Extension Manager
 flatpak install -y --noninteractive flathub com.mattjakeman.ExtensionManager
@@ -108,6 +108,15 @@ flatpak install -y --noninteractive flathub org.signal.Signal
 sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
 sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
 sudo dnf install 1password
+
+# Remove Rhythmbox
+sudo dnf remove rhythmbox
+
+# Remove LibreOffice
+sudo dnf remove libreoffice*
+
+# Install OnlyOffice
+sudo dnf install https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm
 
 echo "Install the following Gnome extensions using the Extensions Manager or Extensions app"
 echo "  Blur my Shell"
