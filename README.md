@@ -9,7 +9,7 @@ In this script I do the following:
 * update the OS to the latest versions and packages.
 * look for, download and then update the firmware to the latest versions if any firmware is available.
 * add the rpm fusion free and non-free repositories
-* upgrate the OS and group update core
+* upgrade the OS and group update core
 * install and configure an NFS server
 * install unzip, p7unzip, unrar, tmate (securely share terminal) and tree (list files in a tree structure)
 * install some new fonts
