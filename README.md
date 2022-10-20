@@ -42,3 +42,60 @@ Some Gnome extensions I like include:
 * Places status indicator
 
 From here I will install other packages based on my needs. 
+  
+# Fedora 36 headless VM server setup
+How I create servers to run virtual machines
+  
+First install a Fedora server or Fedora minimal server.  Be sure to also install the optional headless management software packages (cockpit)
+
+Next enable and start cockpit
+  
+```sudo systemctl enable --now cockpit.socket```
+  
+Generate ssh keys and copy them to any other servers in the cluster.
+  
+```ssh-keygen```
+  
+```ssh-copy-id <user>@vmserver.home.io```
+  
+Install packages for running virtual machines with the KVM hypervisor
+  
+```sudo dnf -y install bridge-utils libvirt virt-install qemu-kvm```
+
+Edit /etc/sudoers and comment out %wheel and uncomment the #%wheel with NOPASSWD so you can do passwordless ssh
+  
+```sudo EDITOR=vi visudo```
+
+Install some more hypervisor utilities
+  
+```sudo dnf install libvirt-devel virt-top libguestfs-tools guestfs-tools```
+
+Enable and start libvirtd
+  
+```sudo systemctl enable --now libvirtd```
+
+Start sshd 
+  
+```sudo systemctl enable --now sshd```
+
+Do an upgrade to make sure you have all the latest packages
+  
+```sudo dnf upgrade -y```
+  
+Add cockpit and ssh to the firewall and make that change permanent
+  
+```sudo firewall-cmd --add-service=cockpit```
+  
+```sudo firewall-cmd --runtime-to-permanent```
+  
+Install some additional cockpit modules to add functionality to cockpit
+  
+```sudo dnf install cockpit-bridge cockpit-file-sharing cockpit-machines cockpit-navigator cockpit-networkmanager cockpit-ostree cockpit-packagekit cockpit-pcp cockpit-podman cockpit-selinux cockpit-storaged cockpit-system cockpit-ws -y```
+
+Reboot the system
+
+```sudo reboot```
+  
+Access cockpit by going to https://<server name or IP address>:9090
+  
+If you have only one VM Server, you can manage the vms from cockpit.  If you want to manage the vms remotely with virt-manager, you will need to install virt-manager on a system that has a GUI (Linux Gnome or MacOS for example) and you will need to copy your ssh public key to the root user account on the vmserver.  Its easiest to do this in cockpit/accounts.  Once that is done, create your connection with virt-manager and you can access the console window from that app.
