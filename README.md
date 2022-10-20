@@ -96,6 +96,6 @@ Reboot the system
 
 ```sudo reboot```
   
-Access cockpit by going to https://<server name or IP address>:9090
+Access cockpit by going to ```https://<server name or IP address>:9090```
   
 If you have only one VM Server, you can manage the vms from cockpit.  If you want to manage the vms remotely with virt-manager, you will need to install virt-manager on a system that has a GUI (Linux Gnome or MacOS for example) and you will need to copy your ssh public key to the root user account on the vmserver.  Its easiest to do this in cockpit/accounts.  Once that is done, create your connection with virt-manager and you can access the console window from that app.
